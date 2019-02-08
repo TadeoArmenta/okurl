@@ -1,6 +1,9 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.newWebSocket
+import com.baulsupp.okurl.kotlin.okshell
+import com.baulsupp.okurl.kotlin.query
 import com.baulsupp.okurl.services.slack.model.RtmConnect
 import com.baulsupp.okurl.ws.WebSocketPrinter
 import kotlinx.coroutines.runBlocking

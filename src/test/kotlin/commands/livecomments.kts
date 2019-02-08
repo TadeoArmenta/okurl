@@ -1,7 +1,8 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.oksocial.output.UsageException
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.color
 import com.baulsupp.okurl.sse.messageHandler
 import com.baulsupp.okurl.sse.newSse
 import okhttp3.HttpUrl
@@ -45,6 +46,7 @@ data class ReactionCounts(
     return "👍".rep(LIKE) + "❤️".rep(LOVE) + "😲".rep(WOW) + "😂".rep(HAHA) + "😢".rep(SAD) + "😡".rep(ANGRY)
   }
 }
+
 data class ReactionCount(val key: String, val value: Int)
 data class Reactions(val view_id: Long, val reaction_stream: List<ReactionCount>) {
   fun counts(): ReactionCounts {

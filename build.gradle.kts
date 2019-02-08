@@ -13,6 +13,7 @@ plugins {
   id("com.jfrog.bintray") version "1.8.4"
   id("org.jetbrains.dokka") version "0.9.17"
   id("net.nemerosa.versioning") version "2.8.2"
+  kotlin("plugin.scripting") version Versions.kotlin
 }
 
 repositories {
@@ -103,7 +104,10 @@ dependencies {
   implementation(Deps.jkeychain)
   implementation(Deps.jnrUnixSocket)
   implementation(Deps.jsr305)
-  implementation(Deps.kotlinCompilerEmbeddable)
+  implementation("org.jetbrains.kotlin:kotlin-scripting-common:1.3.21")
+  implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:1.3.21")
+  implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:1.3.21")
+  implementation("org.jetbrains.kotlin:kotlin-script-util:1.3.21")
   implementation(Deps.kotlinReflect)
   implementation(Deps.kotlinStandardLibrary)
   implementation(Deps.moshi)

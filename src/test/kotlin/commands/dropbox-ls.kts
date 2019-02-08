@@ -1,6 +1,7 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.jsonPostRequest
+import com.baulsupp.okurl.kotlin.query
 import com.baulsupp.okurl.services.dropbox.model.DropboxFileList
 
 val path = args.firstOrNull() ?: ""

@@ -8,7 +8,7 @@ object ScriptMainTest {
   @JvmStatic
   fun main(args: Array<String>) {
     runBlocking {
-      com.baulsupp.okurl.kotlin.main(arrayOf("./src/test/kotlin/commands/contributors.kts"))
+      com.baulsupp.okurl.kotlin.main(arrayOf("./src/test/kotlin/commands/contributors.oks.kts"))
     }
   }
 }

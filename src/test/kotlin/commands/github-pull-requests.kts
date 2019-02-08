@@ -4,7 +4,6 @@ import com.baulsupp.okurl.kotlin.postJsonBody
 import com.baulsupp.okurl.kotlin.query
 import com.baulsupp.okurl.kotlin.request
 import com.baulsupp.okurl.kotlin.usage
-import com.baulsupp.okurl.kotlin.args
 
 data class Commit(val oid: String)
 data class CommitNode(val commit: Commit)
@@ -12,6 +11,7 @@ data class Commits(val nodes: List<CommitNode>)
 data class PullRequest(val author: Author, val title: String, val permalink: String, val updatedAt: String, val commits: Commits) {
   val commit = commits.nodes.last().commit
 }
+
 data class PullRequests(val nodes: List<PullRequest>)
 data class Author(val name: String?, val login: String)
 data class Repository(val pullRequests: PullRequests)

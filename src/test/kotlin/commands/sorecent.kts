@@ -1,6 +1,9 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.epochSecondsToDate
+import com.baulsupp.okurl.kotlin.query
+import com.baulsupp.okurl.kotlin.terminalWidth
 import com.baulsupp.okurl.services.stackexchange.model.Questions
 import kotlinx.coroutines.runBlocking
 

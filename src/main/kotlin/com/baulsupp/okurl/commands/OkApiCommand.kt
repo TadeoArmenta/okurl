@@ -30,22 +30,24 @@ class OkApiCommand : ShellCommand, MainAware {
 
     val script = FileSystems.getDefault().getPath(args.removeAt(0))
 
-    val engine = KotlinJsr223JvmLocalScriptEngineFactory().scriptEngine
+//    val engine = KotlinJsr223JvmLocalScriptEngineFactory().scriptEngine
+//
+//    val lines = script.toFile().readText()
+//
+//    if (args.size < 1) {
+//      System.err.println("usage: okapi file.kts arguments")
+//      exitProcess(-2)
+//    }
+//
+//    return args.map { item ->
+//      engine.put("item", item)
+//      eval(engine, "val item = bindings[\"item\"] as String")
+//      val result = eval(engine, lines)
+//
+//      toRequest(result)
+//    }
 
-    val lines = script.toFile().readText()
-
-    if (args.size < 1) {
-      System.err.println("usage: okapi file.kts arguments")
-      exitProcess(-2)
-    }
-
-    return args.map { item ->
-      engine.put("item", item)
-      eval(engine, "val item = bindings[\"item\"] as String")
-      val result = eval(engine, lines)
-
-      toRequest(result)
-    }
+    return listOf()
   }
 
   suspend fun credentials(name: String): Any? {

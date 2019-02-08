@@ -1,10 +1,7 @@
 #!/usr/bin/env okscript
 
 import com.baulsupp.okurl.kotlin.*
-import com.baulsupp.okurl.services.twitter.model.SearchResults
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import java.net.URLEncoder
 
 var target = args[0]
 var message = args.drop(1)
@@ -17,7 +14,7 @@ data class MessageCreate(val target: Target, val message_data: MessageData)
 data class DmEvent(val type: String = "message_create", val message_create: MessageCreate)
 data class DmRequest(val event: DmEvent) {
   companion object {
-      fun simple(target: String, message: String) = DmRequest(DmEvent(message_create = MessageCreate(target = Target(target), message_data = MessageData(text=message))))
+    fun simple(target: String, message: String) = DmRequest(DmEvent(message_create = MessageCreate(target = Target(target), message_data = MessageData(text = message))))
   }
 }
 

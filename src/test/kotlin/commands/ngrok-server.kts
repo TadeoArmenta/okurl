@@ -1,12 +1,11 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.client
-import com.baulsupp.okurl.kotlin.query
-import com.baulsupp.okurl.kotlin.showOutput
 import com.baulsupp.oksocial.output.ConsoleHandler
 import com.baulsupp.oksocial.output.ResponseExtractor
 import com.baulsupp.oksocial.output.isInstalled
 import com.baulsupp.oksocial.output.process.exec
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.query
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpServer
 import kotlinx.coroutines.delay

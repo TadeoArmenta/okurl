@@ -2,7 +2,7 @@ package com.baulsupp.okurl.kotlin
 
 import com.baulsupp.oksocial.output.UsageException
 import com.baulsupp.okurl.commands.CommandLineClient
-import com.baulsupp.okurl.util.ClientException
+import com.baulsupp.okurl.scripting.ScriptEnvironment
 import com.github.rvesse.airline.HelpOption
 import com.github.rvesse.airline.SingleCommand
 import com.github.rvesse.airline.annotations.Command
@@ -10,12 +10,15 @@ import com.github.rvesse.airline.parser.errors.ParseException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.debug.DebugProbes
 import org.conscrypt.OpenSSLProvider
-import org.jetbrains.kotlin.script.jsr223.KotlinJsr223JvmLocalScriptEngineFactory
 import java.io.File
 import java.security.Security
 import javax.inject.Inject
-import javax.script.ScriptException
-import kotlin.reflect.KClass
+import kotlin.script.experimental.api.*
+import kotlin.script.experimental.host.FileScriptSource
+import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
+import kotlin.script.experimental.jvm.dependenciesFromCurrentContext
+import kotlin.script.experimental.jvm.jvm
+import kotlin.script.experimental.jvmhost.*
 
 @Command(name = Main.NAME, description = "Kotlin scripting for APIs")
 class Main : CommandLineClient() {
@@ -28,37 +31,42 @@ class Main : CommandLineClient() {
     OkShell.instance = OkShell(this)
   }
 
+  fun createJvmScriptingHost(): BasicJvmScriptingHost {
+//    val cache = FileBasedScriptCache(cacheDir)
+    val compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration, cache = CompiledJvmScriptsCache.NoCache)
+    val evaluator = BasicJvmScriptEvaluator()
+    val host = BasicJvmScriptingHost(compiler = compiler, evaluator = evaluator)
+    return host
+  }
+
   override fun runCommand(runArguments: List<String>): Int {
-    val engine = KotlinJsr223JvmLocalScriptEngineFactory().scriptEngine
 
     if (runArguments.isEmpty()) {
       System.err.println("usage: okscript file.kts arguments")
       return -2
     }
 
-    val script = runArguments[0]
+    val scriptLocation = runArguments[0]
     com.baulsupp.okurl.kotlin.args = runArguments.drop(1)
 
-    try {
-      engine.eval(File(script).readText())
-      return 0
-    } catch (se: ScriptException) {
-      val cause = se.cause
-
-      val message = se.message
-      checkKnownException(UsageException::class, message)
-      checkKnownException(ClientException::class, message)
-
-      throw cause ?: se
+    val scriptHost = createJvmScriptingHost()
+    val scriptSource = FileScriptSource(File(scriptLocation))
+    val config = ScriptEvaluationConfiguration {
+      providedProperties("args" to args, "client" to client)
+//      providedProperties("args" to args.toTypedArray())
     }
-  }
 
-  private fun checkKnownException(exceptionClass: KClass<*>, message: String?) {
-    val badprefix = "${exceptionClass.qualifiedName}: "
-    if (message != null && message.startsWith(badprefix)) {
-      // TODO better handling
-      throw usage(message.lines().first().substring(badprefix.length))
+    val compilationConfig = createJvmCompilationConfigurationFromTemplate<ScriptEnvironment> {
+      jvm {
+        dependenciesFromCurrentContext(wholeClasspath = true)
+      }
     }
+
+    scriptHost.eval(scriptSource, compilationConfig, config).onFailure {
+      it.reports.forEach(::println)
+    }
+
+    return 0
   }
 
   override fun name(): String = NAME

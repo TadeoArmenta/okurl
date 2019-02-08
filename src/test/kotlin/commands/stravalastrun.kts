@@ -1,11 +1,7 @@
 #!/usr/bin/env okscript
 
 import com.baulsupp.oksocial.output.UsageException
-import com.baulsupp.okurl.kotlin.client
-import com.baulsupp.okurl.kotlin.query
-import com.baulsupp.okurl.kotlin.queryList
-import com.baulsupp.okurl.kotlin.show
-import com.baulsupp.okurl.kotlin.warmup
+import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.okurl.services.mapbox.staticMap
 import com.baulsupp.okurl.services.strava.model.ActivitySummary
 import kotlinx.coroutines.runBlocking

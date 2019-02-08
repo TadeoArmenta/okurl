@@ -1,10 +1,6 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.client
-import com.baulsupp.okurl.kotlin.moshi
-import com.baulsupp.okurl.kotlin.query
-import com.baulsupp.okurl.kotlin.request
-import com.baulsupp.okurl.kotlin.simpleOutput
+import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.okurl.services.google.model.DiscoveryApis
 import com.baulsupp.okurl.services.google.model.DiscoveryDoc
 import com.baulsupp.okurl.services.google.model.DiscoveryIndexMap

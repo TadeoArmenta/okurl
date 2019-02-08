@@ -1,7 +1,7 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.oksocial.output.UsageException
+import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.okurl.services.mapbox.model.MapboxDrivingResults
 import com.baulsupp.okurl.services.mapbox.model.MapboxPlacesResult
 import com.baulsupp.okurl.services.mapbox.staticMap

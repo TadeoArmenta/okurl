@@ -1,6 +1,6 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.query
 
 data class Thread(val id: String, val snippet: String, val historyId: String)
 data class ThreadList(val threads: List<Thread>, val nextPageToken: String?, val resultSizeEstimate: Int)

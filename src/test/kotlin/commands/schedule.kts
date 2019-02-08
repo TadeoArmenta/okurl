@@ -1,11 +1,14 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.postJsonBody
+import com.baulsupp.okurl.kotlin.query
+import com.baulsupp.okurl.kotlin.request
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.utils.keysToMap
 import java.io.File
-import java.time.DayOfWeek.*
 import java.time.*
+import java.time.DayOfWeek.*
 
 data class MeetingTime(val start: OffsetDateTime, val end: OffsetDateTime) {
   fun before(other: MeetingTime) = end <= other.start
@@ -15,12 +18,14 @@ data class MeetingTime(val start: OffsetDateTime, val end: OffsetDateTime) {
 
 // Google Free Busy Request
 data class FreeBusyRequestItem(val id: String)
+
 data class FreeBusyRequest(val timeMin: Instant, val timeMax: Instant, val items: List<FreeBusyRequestItem>, val timeZone: String = "UTC")
 
 // Google Free Busy Response
 data class CalendarEntry(val start: Instant, val end: Instant) {
   fun toMeetingTime(offset: ZoneOffset) = MeetingTime(start.atOffset(offset), end.atOffset(offset))
 }
+
 data class Calendar(val busy: List<CalendarEntry>)
 data class FreeBusyResponse(val calendars: Map<String, Calendar>, val kind: String?, val timeMax: String?, val timeMin: String?)
 

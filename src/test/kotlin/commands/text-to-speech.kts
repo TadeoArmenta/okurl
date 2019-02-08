@@ -16,8 +16,8 @@
 // Step 4 say stuff
 // $ ./text-to-speech.kts 'Hello, how are you?'
 
-import com.baulsupp.okurl.kotlin.*
 import com.baulsupp.oksocial.output.SimpleResponse
+import com.baulsupp.okurl.kotlin.*
 import kotlinx.coroutines.runBlocking
 import okio.ByteString.Companion.decodeBase64
 

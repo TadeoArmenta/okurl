@@ -1,6 +1,8 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.location
+import com.baulsupp.okurl.kotlin.query
+import com.baulsupp.okurl.kotlin.show
 import com.baulsupp.okurl.location.Location
 import com.baulsupp.okurl.services.mapbox.staticMap
 
@@ -14,6 +16,7 @@ data class Hospital(
 ) {
   val location = Location(Latitude, Longitude)
 }
+
 data class HospitalResultSet(val rows: List<Hospital>)
 
 val hospitals = query<HospitalResultSet>("https://nhs-england-hospitals.now.sh/hospitals-0cda400/hospitals.jsono?City=${"London"}").rows

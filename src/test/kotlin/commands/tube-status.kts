@@ -1,6 +1,8 @@
 #!/usr/bin/env okscript
 
-import com.baulsupp.okurl.kotlin.*
+import com.baulsupp.okurl.kotlin.client
+import com.baulsupp.okurl.kotlin.color
+import com.baulsupp.okurl.kotlin.queryList
 import com.squareup.moshi.Json
 import kotlinx.coroutines.runBlocking
 import org.fusesource.jansi.Ansi
